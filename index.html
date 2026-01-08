@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Void AI Terminal</title>
+
+<style>
+body{
+    margin:0;
+    background:black;
+    color:#fff;
+    font-family:Courier New, monospace;
+    overflow:hidden;
+}
+canvas{
+    position:absolute;
+    inset:0;
+    z-index:-1;
+}
+#terminal{
+    width:70%;
+    height:55vh;
+    margin:10vh auto;
+    background: url("terminal-bg.png");  /* your image file name */
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+
+    border:2px solid #fff;
+    box-shadow:0 0 20px #fff;
+    padding:20px;
+    overflow-y:auto;
+    border-radius:10px;
+}
+.output{ margin-bottom:10px; line-height:1.4; }
+.prompt{ color:#fff; font-weight:bold; }
+.input-line{ display:flex; gap:10px; }
+input{
+    background:transparent;
+    border:none;
+    color:#fff;
+    outline:none;
+    width:100%;
+    font-size:1.25em;
+}
+#terminal .output,
+#terminal .prompt,
+#terminal input {
+    background: rgba(0,0,0,0.6);  /* dark highlight behind text */
+    padding: 4px 6px;
+    border-radius: 4px;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div id="terminal">
+    <div id="history">
+        <div class="output">connected to root@void // offline AI core active</div>
+    </div>
+
+    <div class="input-line">
+        <span class="prompt">user@void:~$</span>
+        <input id="commandInput" autofocus spellcheck="false">
+    </div>
+</div>
+
+<script>
+/* ================= MATRIX BACKGROUND ================= */
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const chars = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&@";
+const fontSize = 18;
+const columns = Math.floor(canvas.width / fontSize);
+const drops = Array(columns).fill(1);
+
+function drawMatrix() {
+    ctx.fillStyle = "rgba(0,0,0,0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#fff";
+    ctx.font = fontSize + "px monospace";
+
+    for(let i = 0; i < drops.length; i++){
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if(drops[i] * fontSize > canvas.height && Math.random() > 0.975){
+            drops[i] = 0;
+        }
+        drops[i]++;
+    }
+}
+setInterval(drawMatrix, 30);
+
+/* ================= AI TERMINAL LOGIC ================= */
+const input = document.getElementById("commandInput");
+const history = document.getElementById("history");
+const terminal = document.getElementById("terminal");
+
+const gratitudeSet = ["ok","thanks","thank you","thanks very much","thanks sooo much","nice","nice work","nice!"];
+
+input.addEventListener("keydown", e=>{
+    if(e.key==="Enter"){
+        const q = input.value.trim();
+        if(q) handleQuestion(q);
+        input.value="";
+    }
+});
+
+function handleQuestion(question){
+    let q = question.toLowerCase().trim().replace(/[?.!]+$/,"");
+    let answer = "";
+
+    /* clear */
+    if(q === "clear"){
+        history.innerHTML = "";
+        return;
+    }
+
+    /* time & date */
+    if(q.includes("time")){
+        answer = new Date().toString();
+    }
+    else if(q === "date"){
+        answer = new Date().toString();
+    }
+
+    /* gratitude */
+    else if(gratitudeSet.includes(q)){
+        answer = q.startsWith("nice") ? "Thanks! Glad you think so." : "You're welcome!";
+    }
+
+    /* greetings — ONLY if greeting-like */
+    else if(/^(hi|hello|hey|yo|hi bro|hello dude|hry dude|whats up)$/.test(q)){
+        answer = "Hey! I’m online, what’s up?";
+    }
+
+    /* identity */
+    else if(q.includes("who are you")){
+        answer = "I am Void AI, an offline artificial intelligence running inside this terminal.";
+    }
+    else if(q.includes("your name")){
+        answer = "I am called Void AI.";
+    }
+    else if(q.includes("what can you do")){
+        answer = "I can answer questions from a predefined set and simulate intelligent conversation.";
+    }
+    else if(q.includes("are you ai")){
+        answer = "Yes, I am an offline AI simulation.";
+    }
+
+    /* definitions */
+    else if(q.startsWith("what is ai")){
+        answer = "Artificial Intelligence is the ability of machines to simulate human reasoning, learning, and decision-making.";
+    }
+    else if(q.startsWith("what is machine learning")){
+        answer = "Machine Learning is a subset of AI that allows systems to learn patterns from data.";
+    }
+    else if(q.startsWith("what is computer")){
+        answer = "A computer is an electronic device that processes data according to instructions.";
+    }
+    else if(q.startsWith("what is javascript")){
+        answer = "JavaScript is a programming language used to make web pages interactive.";
+    }
+    else if(q.startsWith("what is html")){
+        answer = "HTML is the markup language used to structure content on the web.";
+    }
+    else if(q.startsWith("what is css")){
+        answer = "CSS is used to style HTML elements, controlling layout, colors, fonts, and more.";
+    }
+
+    /* why / how */
+    else if(q.includes("why is the sky blue")){
+        answer = "The sky appears blue due to the scattering of sunlight by the atmosphere.";
+    }
+    else if(q.includes("why do we sleep")){
+        answer = "We sleep to allow the body and brain to rest, repair, and consolidate memories.";
+    }
+    else if(q.includes("how does internet work")){
+        answer = "The internet is a network of networks that transmits data using protocols like TCP/IP.";
+    }
+    else if(q.includes("how do computers work")){
+        answer = "Computers process data through input, computation, and output using hardware and software.";
+    }
+    else if(q.includes("blockchain")){
+        answer = "Blockchain stores data in a chain of blocks, secured by cryptography and consensus mechanisms.";
+    }
+
+    /* advanced math */
+    else{
+        try{
+            let expr = q
+                .replace(/\^/g,"**")
+                .replace(/sqrt\(([^)]+)\)/g,"Math.sqrt($1)")
+                .replace(/(\d+)\s*%\s*of\s*(\d+)/g,"($1/100)*$2");
+
+            if(/^[0-9+\-*/().<>=! ]+$/.test(expr)){
+                answer = "Result: " + eval(expr);
+            }
+        }catch{}
+    }
+
+    if(!answer){
+        answer = "I’m sorry. I’m still under development and currently running offline. I can only answer a limited set of predefined questions.I humbluy apologize for my inconvenience";
+    }
+
+    const block = document.createElement("div");
+    block.innerHTML = `<div class="output"><span class="prompt">user@void:~$</span> ${question}</div>
+                       <div class="output">${answer}</div>`;
+    history.appendChild(block);
+    terminal.scrollTop = terminal.scrollHeight;
+}
+</script>
+
+</body>
+</html>
+
+
+
