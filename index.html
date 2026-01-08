@@ -202,9 +202,10 @@ function handleQuestion(question){
             let expr = q
                 .replace(/\^/g,"**")
                 .replace(/sqrt\(([^)]+)\)/g,"Math.sqrt($1)")
+                 .replace(/cbrt\(([^)]+)\)/g,"Math.cbrt($1)")
                 .replace(/(\d+)\s*%\s*of\s*(\d+)/g,"($1/100)*$2");
 
-            if(/^[0-9+\-*/().<>=! ]+$/.test(expr)){
+            if(/^[0-9+\-*/().<>=! a-zA-Z]+$/.test(expr)){
                 answer = "Result: " + eval(expr);
             }
         }catch{}
@@ -224,3 +225,4 @@ function handleQuestion(question){
 
 </body>
 </html>
+
