@@ -28,7 +28,7 @@ canvas{
     background-repeat: no-repeat;
 
     border:2px solid #fff;
-    box-shadow:0 0 20px #fff;
+    box-shadow:0 0 20px #f00;
     padding:20px;
     overflow-y:auto;
     border-radius:10px;
@@ -84,10 +84,10 @@ const columns = Math.floor(canvas.width / fontSize);
 const drops = Array(columns).fill(1);
 
 function drawMatrix() {
-    ctx.fillStyle = "rgba(0,0,0,0.05)";
+    ctx.fillStyle = "rgba(250,0,0)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = "#fff";
+    ctx.fillStyle = "#f00";
     ctx.font = fontSize + "px monospace";
 
     for(let i = 0; i < drops.length; i++){
@@ -286,4 +286,5 @@ else if((q.includes("increase") || q.includes("improve")) && (q.includes("speed"
 
 </body>
 </html>
+
 
