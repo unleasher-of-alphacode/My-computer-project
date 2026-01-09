@@ -158,6 +158,16 @@ function handleQuestion(question){
     else if(q.includes("are you ai")){
         answer = "Yes, I am an offline AI simulation.";
     }
+        else if(
+    q.includes("made") &&
+    q.includes("you"))
+    answer = "I was made by Sriram Pathruni, Shreyas Sreedharan, and Kavin Kashyap.";
+}
+    else if(
+        q.includes("age") &&
+        q.includes("your"))
+        answer = "I don't have a biological age because I’m an AI.";
+        
 
     /* definitions */
     else if(q.startsWith("what is ai")){
@@ -283,6 +293,7 @@ else if(
 
 </body>
 </html>
+
 
 
 
