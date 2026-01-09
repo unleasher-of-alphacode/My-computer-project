@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title> Milo AI Terminal</title>
+<title>Void AI Terminal</title>
 
 <style>
 body{
@@ -21,13 +21,13 @@ canvas{
     width:70%;
     height:55vh;
     margin:10vh auto;
-    background: url("https://i.postimg.cc/prMhf0k9/bgpic.png");
+    background: url("https://i.postimg.cc/xCW7Cmyw/f9a59a60-003a-4d7f-90ee-843b0851fd72.png");
 ");  /* your image file name */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 
-    border:2px solid #255,0,0;
+    border:2px solid #fff;
     box-shadow:0 0 20px #fff;
     padding:20px;
     overflow-y:auto;
@@ -39,7 +39,7 @@ canvas{
 input{
     background:transparent;
     border:none;
-    color:#;
+    color:#fff;
     outline:none;
     width:100%;
     font-size:1.25em;
@@ -87,7 +87,7 @@ function drawMatrix() {
     ctx.fillStyle = "rgba(0,0,0,0.05)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = "#FF0000";
+    ctx.fillStyle = "#fff";
     ctx.font = fontSize + "px monospace";
 
     for(let i = 0; i < drops.length; i++){
@@ -147,10 +147,10 @@ function handleQuestion(question){
 
     /* identity */
     else if(q.includes("who are you")){
-        answer = "I am Milo AI, an offline artificial intelligence running inside this terminal.";
+        answer = "I am Void AI, an offline artificial intelligence running inside this terminal.";
     }
     else if(q.includes("your name")){
-        answer = "I am called Milo.";
+        answer = "I am called Void AI.";
     }
     else if(q.includes("what can you do")){
         answer = "I can answer questions from a predefined set and simulate intelligent conversation.";
@@ -158,16 +158,6 @@ function handleQuestion(question){
     else if(q.includes("are you ai")){
         answer = "Yes, I am an offline AI simulation.";
     }
-        else if(
-    q.includes("made") &&
-    q.includes("you"))
-    answer = "I was made by Sriram Pathruni, Shreyas Sreedharan, and Kavin Kashyap.";
-}
-    else if(
-        q.includes("age") &&
-        q.includes("your"))
-        answer = "I don't have a biological age because I’m an AI.";
-        
 
     /* definitions */
     else if(q.startsWith("what is ai")){
@@ -204,26 +194,24 @@ function handleQuestion(question){
     }
     else if(q.includes("blockchain")){
         answer = "Blockchain stores data in a chain of blocks, secured by cryptography and consensus mechanisms.";
-    
-        
-        
+    }
+
     /* advanced math */
     else{
         try{
             let expr = q
                 .replace(/\^/g,"**")
                 .replace(/sqrt\(([^)]+)\)/g,"Math.sqrt($1)")
-                 .replace(/cbrt\(([^)]+)\)/g,"Math.cbrt($1)")
                 .replace(/(\d+)\s*%\s*of\s*(\d+)/g,"($1/100)*$2");
 
-            if(/^[0-9+\-*/().<>=! a-zA-Z]+$/.test(expr)){
+            if(/^[0-9+\-*/().<>=! ]+$/.test(expr)){
                 answer = "Result: " + eval(expr);
             }
         }catch{}
     }
 
     if(!answer){
-        answer = "I’m sorry. I’m still under development and currently running offline. I can only answer a limited set of predefined questions.I humbly apologize for my inconvenience";
+        answer = "I’m sorry. I’m still under development and currently running offline. I can only answer a limited set of predefined questions.I humbluy apologize for my inconvenience";
     }
 
     const block = document.createElement("div");
@@ -236,15 +224,3 @@ function handleQuestion(question){
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
