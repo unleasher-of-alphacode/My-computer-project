@@ -27,7 +27,7 @@ canvas{
     background-position: center;
     background-repeat: no-repeat;
 
-    border:2px solid #fff;
+    border:2px solid #255,0,0;
     box-shadow:0 0 20px #fff;
     padding:20px;
     overflow-y:auto;
@@ -39,7 +39,7 @@ canvas{
 input{
     background:transparent;
     border:none;
-    color:#fff;
+    color:#FF0000;
     outline:none;
     width:100%;
     font-size:1.25em;
@@ -87,7 +87,7 @@ function drawMatrix() {
     ctx.fillStyle = "rgba(0,0,0,0.05)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = "#fff";
+    ctx.fillStyle = "#FF0000";
     ctx.font = fontSize + "px monospace";
 
     for(let i = 0; i < drops.length; i++){
@@ -293,6 +293,7 @@ else if(
 
 </body>
 </html>
+
 
 
 
