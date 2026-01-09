@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Void AI Terminal</title>
+<title></title> Milo AI Terminal</title>
 
 <style>
 body{
@@ -21,7 +21,7 @@ canvas{
     width:70%;
     height:55vh;
     margin:10vh auto;
-    background: url("https://i.postimg.cc/xCW7Cmyw/f9a59a60-003a-4d7f-90ee-843b0851fd72.png");
+    background: url("https://i.postimg.cc/prMhf0k9/bgpic.png");
 ");  /* your image file name */
     background-size: cover;
     background-position: center;
@@ -107,7 +107,7 @@ const input = document.getElementById("commandInput");
 const history = document.getElementById("history");
 const terminal = document.getElementById("terminal");
 
-const gratitudeSet = ["ok","thanks","thank you","thanks very much","thanks sooo much","nice","nice work","nice!"];
+const gratitudeSet = ["ok","thanks","thank you","thanks very much","thanks sooo much","nice","nice work","cool","sweet","noice"];
 
 input.addEventListener("keydown", e=>{
     if(e.key==="Enter"){
@@ -141,16 +141,16 @@ function handleQuestion(question){
     }
 
     /* greetings — ONLY if greeting-like */
-    else if(/^(hi|hello|hey|yo|hi bro|hello dude|hry dude|whats up)$/.test(q)){
+    else if(/^(hi|hello|hey|yo|hi bro|hello dude |sup bro|hey dude|whats up)$/.test(q)){
         answer = "Hey! I’m online, what’s up?";
     }
 
     /* identity */
     else if(q.includes("who are you")){
-        answer = "I am Void AI, an offline artificial intelligence running inside this terminal.";
+        answer = "I am milo AI, an offline artificial intelligence running inside this terminal.";
     }
     else if(q.includes("your name")){
-        answer = "I am called Void AI.";
+        answer = "I am called Milo";
     }
     else if(q.includes("what can you do")){
         answer = "I can answer questions from a predefined set and simulate intelligent conversation.";
@@ -158,7 +158,16 @@ function handleQuestion(question){
     else if(q.includes("are you ai")){
         answer = "Yes, I am an offline AI simulation.";
     }
-
+        else if(
+    q.includes("made") &&
+    q.includes("you")){
+    answer = "I was made by Sriram Pathruni, Shreyas Sreedharan, and Kavin Kashyap.";
+}
+        else if(
+        q.includes("age") &&
+        q.includes("your")){
+        answer = "I don't have a biological age because I’m an AI.";
+        }
     /* definitions */
     else if(q.startsWith("what is ai")){
         answer = "Artificial Intelligence is the ability of machines to simulate human reasoning, learning, and decision-making.";
@@ -195,23 +204,76 @@ function handleQuestion(question){
     else if(q.includes("blockchain")){
         answer = "Blockchain stores data in a chain of blocks, secured by cryptography and consensus mechanisms.";
     }
+else if(q.includes("classroom") && (q.includes("quiet") || q.includes("silence") || q.includes("control"))) {
+    answer = "To keep a classroom quiet, set clear rules, use signals like hand-raises, engage students actively, and stay calm but firm.";
+}
+else if(q.includes("hyperactive") && (q.includes("child") || q.includes("kid"))) {
+    answer = "Hyperactive children respond best to remedies like- total concentration, meditation and controlling addictions.";
+}
+else if(q.includes("snowflake") && q.includes("database")) {
+    answer = "Snowflake is a cloud-based data warehouse used for storing, analyzing, and sharing large amounts of data.";
+}
+else if(q.includes("cricket") && q.includes("bat") && q.includes("best")) {
+    answer = "Some of the top cricket bat companies are Kookaburra, Gray-Nicolls, SG, Ton and SS.";
+}
+else if(q.includes("device") && (q.includes("play") || q.includes("watch")) && (q.includes("without parents") || q.includes("hidden"))) {
+    answer = You can hide your device between your books and play smartly when they are not near you";
+}
+else if(q.includes("room") && (q.includes("tidy") || q.includes("clean") || q.includes("organize"))) {
+    answer = "To tidy your room, pick up items, put things in designated places, make your bed, and do a quick sweep of the floor.";
+}
+else if(q.includes("bee") && (q.includes("sting") || q.includes("bite")) && (q.includes("neutralize") || q.includes("treat") || q.includes("remove"))) {
+    answer = "To treat a bee sting, remove the stinger carefully, wash the area with soap and water, apply a cold pack to reduce swelling, and consider an antihistamine if needed.";
+}
+else if(q.includes("congruence")) {
+    answer = "Congruence in geometry means that two shapes are identical in form and size. They can be matched exactly when superimposed.";
+}
+else if(q.includes("properties") && q.includes("triangle")) {
+    answer = "Properties of triangles include: the sum of interior angles is 180°, types of triangles based on sides (equilateral, isosceles, scalene), and types based on angles (acute, right, obtuse).";
+}
+else if(q.includes("negative thoughts") || q.includes("mind") || q.includes("remove")) {
+    answer = "To remove negative thoughts, practice mindfulness, focus on positive actions, challenge unhelpful thinking, and engage in hobbies or physical activity.";
+}
+else if(q.includes("newton") && q.includes("3rd") && q.includes("law")) {
+    answer = "Newton's 3rd Law states: For every action, there is an equal and opposite reaction.";
+}
+else if(q.includes("euler") && q.includes("formula")) {
+    answer = "Euler's formula relates complex exponentials and trigonometry: e^(iθ) = cos(θ) + i·sin(θ).";
+}
+else if(q.includes("pulse") && (q.includes("rate") || q.includes("heartbeat")) && (q.includes("adult") || q.includes("human"))) {
+    answer = "The average resting pulse rate of an adult human is typically between 60 and 100 beats per minute.";
+}
+else if((q.includes("programming") || q.includes("languages")) && q.includes("ai")) {
+    answer = "Common programming languages for AI development include Python, R, Java, C++, and Julia.";
+}
+else if(q.includes("resume") && (q.includes("job") || q.includes("interview") || q.includes("find"))) {
+    answer = "You can find resumes for job interviews by creating your own highlighting skills and experience, or looking for sample templates online for guidance.";
+}
+else if(q.includes("difference") && q.includes("artificial intelligence") && q.includes("machine learning") && q.includes("deep learning")) {
+    answer = "AI is the broad concept of machines performing tasks intelligently. Machine Learning is a subset of AI where systems learn from data. Deep Learning is a subset of Machine Learning using neural networks to model complex patterns.";
+}
+else if((q.includes("increase") || q.includes("improve")) && (q.includes("speed") || q.includes("running"))) {
+    answer = "To increase your speed, practice sprinting drills, do strength and endurance training, and ensure proper rest and nutrition.";
+}
+
 
     /* advanced math */
     else{
         try{
             let expr = q
-                .replace(/\^/g,"**")
+               .replace(/\^/g,"**")
                 .replace(/sqrt\(([^)]+)\)/g,"Math.sqrt($1)")
+                 .replace(/cbrt\(([^)]+)\)/g,"Math.cbrt($1)")
                 .replace(/(\d+)\s*%\s*of\s*(\d+)/g,"($1/100)*$2");
 
-            if(/^[0-9+\-*/().<>=! ]+$/.test(expr)){
+            if(/^[0-9+\-*/().<>=! a-zA-Z]+$/.test(expr)){
                 answer = "Result: " + eval(expr);
             }
         }catch{}
     }
 
     if(!answer){
-        answer = "I’m sorry. I’m still under development and currently running offline. I can only answer a limited set of predefined questions.I humbluy apologize for my inconvenience";
+        answer = "I’m sorry. I’m still under development and currently running offline. I can only answer a limited set of predefined questions.I humbly apologize for my inconvenience";
     }
 
     const block = document.createElement("div");
@@ -224,3 +286,4 @@ function handleQuestion(question){
 
 </body>
 </html>
+
